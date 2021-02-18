@@ -1,10 +1,17 @@
-const Header = () => {
+import Logo from "../assets/img/marvel.png";
+const Header = ({ setSearch, search }) => {
    return (
       <>
          <header className="container">
-            <h1 className="h1">Titre</h1>
+            <img src={Logo} alt="logo marvel" />
+
+            <input
+               placeholder="Search Characters Comics..."
+               onChange={(e) => setSearch(e.target.value)}
+               value={search}
+               type="text"
+            />
          </header>
-         <div style={{ "border-bottom": "grey 1px solid" }}></div>
       </>
    );
 };
