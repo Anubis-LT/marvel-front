@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-
 const ComicsCharact = () => {
-   return <div>ComicsCharact.js</div>;
+   return <div>ComicsCharact</div>;
 };
 
-export default ComicsCharact.js;
+export default ComicsCharact;
