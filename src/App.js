@@ -20,33 +20,35 @@ function App() {
    const [source, setSource] = useState();
    const [isLoading, setIsLoading] = useState(true);
 
-   const fetchData = async (event, skip) => {
-      try {
-         setIsLoading(true);
-         let req = "";
-         if (search != "") {
-            source == "characters"
-               ? (req = `search?name=${search}&`)
-               : (req = `search?title=${search}&`);
-         } else {
-            req = `characters?limit=100`;
-         }
-         if (skip != undefined) {
-            req += `&skip=${skip}`;
-         }
-
-         const response = await axios.get(`${AdressSite}${req}`);
-         console.log(response.data);
-         setData(response.data);
-         setIsLoading(false);
-      } catch (error) {
-         alert(error.message);
-         console.log(error.message);
-      }
-   };
    useEffect(() => {
+      const fetchData = async (skip) => {
+         try {
+            setIsLoading(true);
+            let req = "";
+            if (search !== "") {
+               source === "characters"
+                  ? (req = `search?name=${search}&`)
+                  : (req = `search?title=${search}&`);
+            } else {
+               req = `characters?limit=100`;
+            }
+            if (skip !== undefined) {
+               req += `&skip=${skip}`;
+            }
+
+            const response = await axios.get(`${AdressSite}${req}`);
+            console.log(response.data);
+            setData(response.data);
+            setIsLoading(false);
+         } catch (error) {
+            alert(error.message);
+            console.log(error.message);
+         }
+      };
+
       fetchData();
-   }, []);
+   }, [search, source]);
+
    return isLoading ? (
       <span>En cours de chargement... </span>
    ) : (
