@@ -1,7 +1,6 @@
 import "./assets/Css/App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 import Header from "./components/Header";
 import Menu from "./containers/Menu";
@@ -12,76 +11,43 @@ import ComicsCharact from "./containers/ComicsCharact";
 import Footer from "./components/Footer";
 
 /********Acces backend*********/
-const AdressSite = "https://marvel-backend-glt.herokuapp.com/";
+//const adressSite = "https://marvel-backend-glt.herokuapp.com/";
+const adressSite = "http://localhost:3001/";
 
 function App() {
    const [data, setData] = useState([]);
    const [search, setSearch] = useState("");
-   const [source, setSource] = useState();
-   const [isLoading, setIsLoading] = useState(true);
+   const [source, setSource] = useState("");
 
-   useEffect(() => {
-      const fetchData = async (skip) => {
-         try {
-            setIsLoading(true);
-            let req = "";
-            if (search !== "") {
-               source === "characters"
-                  ? (req = `search?name=${search}&`)
-                  : (req = `search?title=${search}&`);
-            } else {
-               req = `characters?limit=100`;
-            }
-            if (skip !== undefined) {
-               req += `&skip=${skip}`;
-            }
-
-            const response = await axios.get(`${AdressSite}${req}`);
-            console.log(response.data);
-            setData(response.data);
-            setIsLoading(false);
-         } catch (error) {
-            alert(error.message);
-            console.log(error.message);
-         }
-      };
-
-      fetchData();
-   }, [search, source]);
-
-   return isLoading ? (
-      <span>En cours de chargement... </span>
-   ) : (
+   return (
       <>
          <Router>
             <div>
-               <Header />
-               <Menu />
+               <Header search={search} setSearch={setSearch} />
+               <Menu source={source} setSource={setSource} setData={setData} />
                <Switch>
                   <Route path="/comics">
-                     {setSource["comics"]}
                      <CharactersComics
-                        AdressSite={AdressSite}
-                        Request="comics"
-                        data={data}
+                        adressSite={adressSite}
+                        source="comics"
+                        search={search}
                      />
                   </Route>
-                  <Route path="/comics/:characterId">
+                  <Route path="/comics/Id">
                      <ComicsCharact />
                   </Route>
 
                   <Route path="/login">
-                     <Login AdressSite={AdressSite} />
+                     <Login adressSite={adressSite} />
                   </Route>
                   <Route path="/signup">
-                     <Signup AdressSite={AdressSite} />
+                     <Signup adressSite={adressSite} />
                   </Route>
                   <Route path="/">
-                     {setSource[""]}
                      <CharactersComics
-                        AdressSite={AdressSite}
-                        Request="characters"
-                        data={data}
+                        adressSite={adressSite}
+                        source="characters"
+                        search={search}
                      />
                   </Route>
                </Switch>

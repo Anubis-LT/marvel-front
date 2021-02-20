@@ -1,5 +1,5 @@
 import Logo from "../assets/img/marvel.png";
-const Header = ({ setSearch, search }) => {
+const Header = ({ search, setSearch }) => {
    return (
       <>
          <header className="container">
