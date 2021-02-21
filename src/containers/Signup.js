@@ -33,7 +33,6 @@ const Signup = ({ setUser, AdressSite }) => {
             history.push("/");
          }
       } catch (error) {
-         alert("toto:" + error);
          console.log(error);
       }
    };
@@ -107,16 +106,6 @@ const Signup = ({ setUser, AdressSite }) => {
                      placeholder="Téléphone"
                   />
 
-                  <div className="newsletterInscription">
-                     <input type="checkbox" />
-                     S'incrire à notre newsletter
-                  </div>
-                  <p></p>
-                  <p>
-                     En m'inscrivant je confirme avoir lu et accepte les Termes
-                     & Conditions Politique de Confidentialité de Vinted; Je
-                     confirme avoir au moins 18 ans.
-                  </p>
                   <button type="submit">S'inscrire</button>
                   <p>
                      <Link to="/login">

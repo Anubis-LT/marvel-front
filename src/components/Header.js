@@ -1,10 +1,9 @@
 import Logo from "../assets/img/marvel.png";
-const Header = ({ search, setSearch }) => {
+const Header = ({ search, setSearch, searchHidden }) => {
    return (
       <>
          <header className="container">
             <img src={Logo} alt="logo marvel" />
-
             <input
                placeholder="Search Characters Comics..."
                onChange={(e) => setSearch(e.target.value)}

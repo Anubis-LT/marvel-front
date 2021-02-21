@@ -7,7 +7,6 @@ import Menu from "./containers/Menu";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import CharactersComics from "./containers/CharactersComics";
-import ComicsCharact from "./containers/ComicsCharact";
 import Footer from "./components/Footer";
 
 /********Acces backend*********/
@@ -17,7 +16,7 @@ const adressSite = "http://localhost:3001/";
 function App() {
    const [data, setData] = useState([]);
    const [search, setSearch] = useState("");
-   const [source, setSource] = useState("");
+   const [source, setSource] = useState("characters");
 
    return (
       <>

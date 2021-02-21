@@ -82,6 +82,7 @@ h1 {
 .characters {
    display: flex;
    flex-wrap: wrap;
+
    justify-content: space-between;
    align-items: flex-start;
    background-color: #fff;
@@ -101,8 +102,10 @@ h1 {
 }
 .character img {
    height: 150px;
+   width: 150px;
    border-radius: 5%;
    object-fit: unset;
+   background-color: #fff;
 }
 .character p {
    background-color: #fff;
@@ -119,6 +122,14 @@ h1 {
    text-transform: lowercase;
 }
 
+.characterInComics {
+   height: 450px;
+   width: 450px;
+}
+.characterInComics img {
+   height: 300px;
+   width: auto;
+}
 footer {
    align-items: center;
    text-align: center;
