@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const Menu = ({ source, setSource, setData }) => {
+const Menu = ({ source, setSource }) => {
    return (
       <>
          <div className="container connection">
@@ -9,7 +9,6 @@ const Menu = ({ source, setSource, setData }) => {
          <div className="container menu">
             <Link
                onClick={() => {
-                  setData([]);
                   setSource(["characters"]);
                }}
                to="/"
@@ -19,14 +18,12 @@ const Menu = ({ source, setSource, setData }) => {
 
             <Link
                onClick={() => {
-                  setData([]);
                   setSource(["comics"]);
                }}
                to="/comics"
             >
                Comics
             </Link>
-            {/*<Link to="/favorites">Favorites</Link>*/}
          </div>
       </>
    );

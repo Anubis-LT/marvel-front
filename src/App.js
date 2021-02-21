@@ -14,7 +14,6 @@ const adressSite = "https://marvel-backend-glt.herokuapp.com/";
 //const adressSite = "http://localhost:3001/";
 
 function App() {
-   const [data, setData] = useState([]);
    const [search, setSearch] = useState("");
    const [source, setSource] = useState("characters");
 
@@ -23,7 +22,7 @@ function App() {
          <Router>
             <div>
                <Header search={search} setSearch={setSearch} />
-               <Menu source={source} setSource={setSource} setData={setData} />
+               <Menu source={source} setSource={setSource} />
                <Switch>
                   <Route path="/comicscharacters">
                      <CharactersComics
