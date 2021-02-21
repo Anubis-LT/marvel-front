@@ -10,8 +10,8 @@ import CharactersComics from "./containers/CharactersComics";
 import Footer from "./components/Footer";
 
 /********Acces backend*********/
-//const adressSite = "https://marvel-backend-glt.herokuapp.com/";
-const adressSite = "http://localhost:3001/";
+const adressSite = "https://marvel-backend-glt.herokuapp.com/";
+//const adressSite = "http://localhost:3001/";
 
 function App() {
    const [data, setData] = useState([]);
