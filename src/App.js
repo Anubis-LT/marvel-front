@@ -26,15 +26,18 @@ function App() {
                <Header search={search} setSearch={setSearch} />
                <Menu source={source} setSource={setSource} setData={setData} />
                <Switch>
+                  <Route path="/comicscharacters">
+                     <CharactersComics
+                        adressSite={adressSite}
+                        source={source}
+                     />
+                  </Route>
                   <Route path="/comics">
                      <CharactersComics
                         adressSite={adressSite}
                         source="comics"
                         search={search}
                      />
-                  </Route>
-                  <Route path="/comics/Id">
-                     <ComicsCharact />
                   </Route>
 
                   <Route path="/login">
@@ -47,7 +50,9 @@ function App() {
                      <CharactersComics
                         adressSite={adressSite}
                         source="characters"
+                        setSource={setSource}
                         search={search}
+                        setSearch={setSearch}
                      />
                   </Route>
                </Switch>

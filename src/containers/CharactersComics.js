@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const CharactersComics = ({ adressSite, source, search }) => {
+const CharactersComics = ({
+   adressSite,
+   source,
+   setSource,
+   search,
+   setSearch,
+}) => {
    const [data, setData] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
 
@@ -11,18 +18,22 @@ const CharactersComics = ({ adressSite, source, search }) => {
             setIsLoading(true);
             let req = "";
             if (search !== "") {
-               source === "characters"
-                  ? (req = `search?name=${search}`)
-                  : (req = `search?title=${search}`);
-            } else {
-               req = `${source}?limit=100`;
-            }
-            const skip = 1;
-            if (skip !== undefined) {
-               req += `&skip=${skip}`;
-            }
+               // condition search for characters and comics
+               source === "characters" // condition
+                  ? (req = `name=${search}`) // list all characters
+                  : source === "comics" && // condition
+                    (req = `title=${search}`); // list all comics
 
-            const response = await axios.get(`${adressSite}display/`, {
+               // condition list comics for id characters  already assigned in source => source/id)
+            } else {
+               // req = `limit=100`;
+            }
+            // const skip = 1;
+            //if (skip !== undefined) {
+            //   req += `&skip=${skip}`;
+            //}
+
+            const response = await axios.post(`${adressSite}display/`, {
                request: req,
                source: source,
             });
@@ -32,6 +43,7 @@ const CharactersComics = ({ adressSite, source, search }) => {
          fetchData();
       } catch (error) {
          console.log(error.message);
+         <p>Erreur de requete</p>;
       }
    }, [adressSite, search, source]);
 
@@ -53,14 +65,36 @@ const CharactersComics = ({ adressSite, source, search }) => {
                                  ? item.name && item.name.substr(0, 16)
                                  : item.title && item.title.substr(0, 16)}
                            </p>
-                           <img
-                              alt={
-                                 source === "characters"
-                                    ? item.name && item.name.substr(0, 16)
-                                    : item.title && item.title.substr(0, 16)
-                              }
-                              src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                           />
+                           {source === "characters" ? (
+                              <Link
+                                 onClick={() => {
+                                    // setData([]);
+                                    const newSource = `comics/${item._id}`;
+                                    setSource([newSource]);
+                                 }}
+                                 to="/comicscharacters"
+                              >
+                                 {" "}
+                                 <img
+                                    alt={
+                                       source === "characters"
+                                          ? item.name && item.name.substr(0, 16)
+                                          : item.title &&
+                                            item.title.substr(0, 16)
+                                    }
+                                    src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                                 />
+                              </Link>
+                           ) : (
+                              <img
+                                 alt={
+                                    source === "characters"
+                                       ? item.name && item.name.substr(0, 16)
+                                       : item.title && item.title.substr(0, 16)
+                                 }
+                                 src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                              />
+                           )}
 
                            <p>
                               {item.description &&
